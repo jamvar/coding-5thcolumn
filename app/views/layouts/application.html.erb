@@ -11,9 +11,10 @@
 
   <body>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand">Coding5thcolumn</a>
+      <a class="navbar-brand" href="/">Coding5thcolumn</a>
       <form class="form-inline">
         <% if user_signed_in? %>
+          <%= link_to 'Show Credentials', api_credentials_path if current_user.admin? %>
           <%= link_to 'Sign Out', destroy_user_session_path, { class: "btn btn-outline-danger my-2 my-sm-0", method: :delete } %>
         <% else %>
           <%= link_to 'Sign In', new_user_session_path, { class: "btn btn-outline-success my-2 my-sm-0" } %>

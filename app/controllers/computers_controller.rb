@@ -5,4 +5,7 @@ class ComputersController < ApplicationController
     @computers = Computer.all
   end
 
+  def credentials
+    @credentials = ApiCredential.where(api_name: "5thcolumn").first
+  end
 end
