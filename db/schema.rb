@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_040641) do
+ActiveRecord::Schema.define(version: 2019_09_24_062853) do
 
   create_table "api_credentials", force: :cascade do |t|
     t.string "api_name"
@@ -25,6 +25,39 @@ ActiveRecord::Schema.define(version: 2019_09_24_040641) do
     t.integer "result_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "computers", force: :cascade do |t|
+    t.string "connecter_guid"
+    t.string "hostname"
+    t.boolean "active"
+    t.string "connector_version"
+    t.string "operating_system"
+    t.string "external_ip"
+    t.string "group_guid"
+    t.datetime "install_date"
+    t.datetime "last_seen"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.integer "computers_id"
+    t.string "computer"
+    t.string "trajectory"
+    t.string "group"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["computers_id"], name: "index_links_on_computers_id"
+  end
+
+  create_table "policies", force: :cascade do |t|
+    t.integer "computers_id"
+    t.string "guid"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["computers_id"], name: "index_policies_on_computers_id"
   end
 
 end

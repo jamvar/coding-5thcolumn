@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  computers: one
+  computer: MyString
+  trajectory: MyString
+  group: MyString
+
+two:
+  computers: two
+  computer: MyString
+  trajectory: MyString
+  group: MyString
