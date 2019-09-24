@@ -17,7 +17,7 @@ namespace :get_daily_data do
 
     def add_computer_data_to_db(response_data)
       @computer = Computer.create do |computer|
-        computer.connecter_guid = response_data["connecter_guid"]
+        computer.connector_guid = response_data["connector_guid"]
         computer.hostname = response_data["hostname"]
         computer.active = response_data["active"]
         computer.connector_version = response_data["connector_version"]
@@ -28,15 +28,15 @@ namespace :get_daily_data do
         computer.last_seen = response_data["last_seen"].to_datetime
       end
 
-      @link = Link.create do |link|
-        link.computers_id = @computer.id
-        link.computer = response_data["links"]["computer"]
+      Link.create do |link|
+        link.computer_id = @computer.id
+        link.computer_link = response_data["links"]["computer"]
         link.trajectory = response_data["links"]["trajectory"]
         link.group = response_data["links"]["group"]
       end
 
       Policy.create do |policy|
-        policy.computers_id = @computer.id
+        policy.computer_id = @computer.id
         policy.guid = response_data["policy"]["guid"]
         policy.name = response_data["policy"]["name"]
       end
@@ -50,13 +50,12 @@ namespace :get_daily_data do
     max_per_page = results["metadata"]["results"]["items_per_page"]
 
     while result_count >= offset
-      #perform add to db with results
       results["data"].each do |result|
         add_computer_data_to_db(result)
       end
-      puts results["data"].count + " Time elapsed: " + (Time.now - start_time)
+      puts "#{results["data"].count}. Time elapsed: #{Time.now - start_time}"
       offset += max_per_page
-      results = getting_results(offset)
+      results = getting_results(offset) if offset <= result_count
     end
 
     @api_result = ApiResult.new
