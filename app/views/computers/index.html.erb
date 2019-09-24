@@ -1,0 +1,36 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">connector_guid</th>
+      <th scope="col">hostname</th>
+      <th scope="col">active/not-active</th>
+      <th scope="col">connector_version</th>
+      <th scope="col">operating_system</th>
+      <th scope="col">external_ip</th>
+      <th scope="col">group_guid</th>
+      <th scope="col">install_date</th>
+      <th scope="col">last_seen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @computers.each do |computer| %>
+      <tr>
+        <th scope="row"><%= computer.id %></th>
+        <td><%= computer.connector_guid %></td>
+        <td><%= computer.hostname %></td>
+        <% if computer.active %>
+          <td>active</td>
+        <% else %>
+          <td>not-active</td>
+        <% end %>
+        <td><%= computer.connector_version %></td>
+        <td><%= computer.operating_system %></td>
+        <td><%= computer.external_ip %></td>
+        <td><%= computer.group_guid %></td>
+        <td><%= computer.install_date %></td>
+        <td><%= computer.last_seen %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
