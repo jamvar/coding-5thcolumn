@@ -10,6 +10,21 @@
   </head>
 
   <body>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand">Coding5thcolumn</a>
+      <form class="form-inline">
+        <% if user_signed_in? %>
+          <%= link_to 'Sign Out', destroy_user_session_path, { class: "btn btn-outline-danger my-2 my-sm-0", method: :delete } %>
+        <% else %>
+          <%= link_to 'Sign In', new_user_session_path, { class: "btn btn-outline-success my-2 my-sm-0" } %>
+        <% end %>
+      </form>
+    </nav>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
+
   </body>
 </html>
