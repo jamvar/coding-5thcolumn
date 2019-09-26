@@ -11,6 +11,8 @@
       <th scope="col">group_guid</th>
       <th scope="col">install_date</th>
       <th scope="col">last_seen</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +32,8 @@
         <td><%= computer.group_guid %></td>
         <td><%= computer.install_date %></td>
         <td><%= computer.last_seen %></td>
+        <td><%= link_to 'Link', computers_link_path(computer.id) %></td>
+        <td><%= link_to 'Policy', computers_policy_path(computer.id) %></td>
       </tr>
     <% end %>
   </tbody>
